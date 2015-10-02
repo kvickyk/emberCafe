@@ -1,0 +1,33 @@
+{{outlet}}
+
+<strong>Add Todo Item:</strong> <br />
+{{input id="addTodoInput" value=addTodoInput}}
+<button id="addTodoBt" {{action 'addTodoAction' addTodoInput}}>Add</button><br />
+{{#if alreadyExists}}
+  <span style="color: red">Todo already exists.</span>
+{{/if}}
+
+
+<h5>Tasks Todo</h5>
+<ul>
+  {{#each model as | todoItem index |}}
+    {{#unless todoItem.isComplete}}
+      <li><input type="checkbox" name="todo-item-{{todoItem.id}}" oninput={{action (mut currentValue) value="currentTarget.value"}}>
+         ID: {{todoItem.id}} - {{todoItem.name}}</li>
+      {{/unless}}
+  {{/each}}
+</ul>
+
+
+<h5> Completed tasks</h5>
+
+<ul>
+  {{#each model as | todoItem index |}}
+  {{#if todoItem.isComplete}}
+    <li>{{input type="checkbox" checked=true}} {{todoItem.name}}</li>
+    {{/if}}
+  {{/each}}
+</ul>
+
+
+<!-- {{input type="checkbox" checked=false name=""}} -->
