@@ -1,33 +1,40 @@
+<form class="form-inline">
+  <div class="form-group">
+    <label for="addTodoInput">Add Todo Item:</label>
+    {{input id="addTodoInput" value=addTodoInput class="form-control"}}
+  </div>
+  <button id="addTodoBt" {{action 'addTodoAction' addTodoInput}} class="btn btn-primary">Add</button><br />
+  {{#if alreadyExists}}
+    <span style="color: red">Todo already exists.</span>
+  {{/if}}
+</form>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">Tasks Todo</div>
+  <ul class="list-group">
+    {{#each model as | todoItem index |}}
+      {{#unless todoItem.isComplete}}
+        <li class="list-group-item">
+            <input type="checkbox" name="todo-item-{{todoItem.id}}" {{action 'onTodoComplete' todoItem}}>
+           {{todoItem.name}}
+         </li>
+        {{/unless}}
+    {{/each}}
+  </ul>
+</div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">Completed tasks</div>
+  <ul class="list-group">
+     {{#each model as | todoItem index |}}
+      {{#if todoItem.isComplete}}
+        <li class="list-group-item">
+          <input type="checkbox" name="todo-item-{{todoItem.id}}" {{action 'onTodoComplete' todoItem}} checked="true">
+          {{todoItem.name}}
+        </li>
+      {{/if}}
+    {{/each}}
+  </ul>
+</div>
 {{outlet}}
-
-<strong>Add Todo Item:</strong> <br />
-{{input id="addTodoInput" value=addTodoInput}}
-<button id="addTodoBt" {{action 'addTodoAction' addTodoInput}}>Add</button><br />
-{{#if alreadyExists}}
-  <span style="color: red">Todo already exists.</span>
-{{/if}}
-
-
-<h5>Tasks Todo</h5>
-<ul>
-  {{#each model as | todoItem index |}}
-    {{#unless todoItem.isComplete}}
-      <li><input type="checkbox" name="todo-item-{{todoItem.id}}" oninput={{action (mut currentValue) value="currentTarget.value"}}>
-         ID: {{todoItem.id}} - {{todoItem.name}}</li>
-      {{/unless}}
-  {{/each}}
-</ul>
-
-
-<h5> Completed tasks</h5>
-
-<ul>
-  {{#each model as | todoItem index |}}
-  {{#if todoItem.isComplete}}
-    <li>{{input type="checkbox" checked=true}} {{todoItem.name}}</li>
-    {{/if}}
-  {{/each}}
-</ul>
-
-
-<!-- {{input type="checkbox" checked=false name=""}} -->

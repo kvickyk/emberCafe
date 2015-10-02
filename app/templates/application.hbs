@@ -1,4 +1,10 @@
-<h2 id="title">Welcome to Ember Cafe</h2>
+<div class="container">
+  <h2 id="title">Welcome to Ember Cafe</h2>
 
-{{link-to 'Home' 'index'}} | {{link-to 'Todos' 'todos'}} | {{link-to 'Order Items' 'orders'}}
+  <ul class="nav nav-tabs">
+    <li role="presentation">{{link-to 'Home' 'index' class="btn btn-default"}}</li>
+    <li role="presentation">{{link-to 'Todos' 'todos' class="btn btn-default"}}</li>
+    <li role="presentation">{{link-to 'Order Items' 'orders' class="btn btn-default"}}</li>
+  </ul>
 {{outlet}}
+</div>

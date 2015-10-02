@@ -38,8 +38,10 @@ export default Ember.Route.extend({
       }
     },
 
-    onTodoComplete: function() {
-      console.log('its here');
+    onTodoComplete: function(itemTodo) {
+      itemTodo.set('isComplete', !itemTodo.get('isComplete'));
+      itemTodo.save();
+      console.log ('Saved: ' + itemTodo.get('name'));
     }
   }
 });
