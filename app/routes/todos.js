@@ -36,6 +36,8 @@ export default Ember.Route.extend({
         this.controller.set('alreadyExists', true);
         console.log('record already exists');
       }
+      this.controller.set('currentTodoItem', newTodoItem);
+      this.controller.set('showAlerts', true);
     },
 
     onTodoComplete: function(itemTodo) {

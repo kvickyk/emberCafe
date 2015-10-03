@@ -1,13 +1,18 @@
-<form class="form-inline">
+<div class="panel panel-default">
+  <div class="panel-body">
   <div class="form-group">
     <label for="addTodoInput">Add Todo Item:</label>
-    {{input id="addTodoInput" value=addTodoInput class="form-control"}}
+    {{input id="addTodoInput" value=addTodoInput class="form-control" insert-newline="addTodoAction"}}
   </div>
-  <button id="addTodoBt" {{action 'addTodoAction' addTodoInput}} class="btn btn-primary">Add</button><br />
   {{#if alreadyExists}}
-    <span style="color: red">Todo already exists.</span>
+    <div class="alert alert-danger">Todo '{{currentTodoItem}}' already exists.</div>
+  {{else}}
+    {{#if showAlerts}}
+    <div class="alert alert-success">Successfully added Todo task: '{{currentTodoItem}}'</div>
+    {{/if}}
   {{/if}}
-</form>
+</div>
+</div>
 
 <div class="panel panel-primary">
   <div class="panel-heading">Tasks Todo</div>
