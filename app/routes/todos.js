@@ -13,7 +13,7 @@ export default Ember.Route.extend({
 
       let alreadyExists = false;
       todosList.forEach(function(todo) {
-        if (todo.get('name') === newTodoItem) {
+        if (todo.get('name') === newTodoItem && !todo.get('isComplete')) {
           alreadyExists = true;
         }
       });
