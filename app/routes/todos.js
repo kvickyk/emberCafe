@@ -9,6 +9,10 @@ export default Ember.Route.extend({
     addTodoAction: function(newTodoItem) {
       console.log("New Todo: " + newTodoItem);
 
+      if (!newTodoItem) {
+        return;
+      }
+
       let todosList = this.store.peekAll('todo');
 
       let alreadyExists = false;
