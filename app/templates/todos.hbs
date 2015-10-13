@@ -1,17 +1,24 @@
 <div class="panel panel-default">
   <div class="panel-body">
   <div class="form-group">
-    <label for="addTodoInput">Add Todo Item:</label>
-    {{input id="addTodoInput" value=addTodoInput class="form-control" insert-newline="addTodoAction"}}
+    <div class="col-lg-6">
+      <div class="input-group">
+        {{input id="addTodoInput" value=addTodoInput class="form-control" enter="addTodoAction"
+        placeholder="Add new todo item..."}}
+        <span class="input-group-btn">
+          <button id="addBt" class="btn btn-default" {{action 'addTodoAction' addTodoInput}}>Add</button>
+        </span>
+      </div>
+    </div>
   </div>
-  {{#if alreadyExists}}
-    <div class="alert alert-danger">Todo '{{currentTodoItem}}' already exists.</div>
-  {{else}}
-    {{#if showAlerts}}
-    <div class="alert alert-success">Successfully added Todo task: '{{currentTodoItem}}'</div>
+  {{#if showAlerts}}
+    {{#if alreadyExists}}
+      <div class="alert alert-danger">Todo '{{currentTodoItem}}' already exists.</div>
+    {{else}}
+      <div class="alert alert-success">Successfully added Todo task: '{{currentTodoItem}}'</div>
     {{/if}}
   {{/if}}
-</div>
+  </div>
 </div>
 
 <div class="panel panel-primary">
@@ -19,7 +26,7 @@
   <ul class="list-group">
     {{#each model as | todoItem index |}}
       {{#unless todoItem.isComplete}}
-        <li class="list-group-item">
+        <li class="list-group-item todo-notComplete">
             <input type="checkbox" name="todo-item-{{todoItem.id}}" {{action 'onTodoComplete' todoItem}}>
            {{todoItem.name}}
          </li>
@@ -34,7 +41,7 @@
   <ul class="list-group">
      {{#each model as | todoItem index |}}
       {{#if todoItem.isComplete}}
-        <li class="list-group-item">
+        <li class="list-group-item todo-completed">
           <input type="checkbox" name="todo-item-{{todoItem.id}}" {{action 'onTodoComplete' todoItem}} checked="true">
           {{todoItem.name}}
         </li>
